@@ -27,13 +27,19 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func find_camera(NodePath) -> Camera3D:
-	var Camera = get_child(2).Camera3D
-	
-	if find_camera(InputEventAction):
-		find_camera(mouse_entered)
-		
-	
-	return 
-	
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+var mouse_position: Vector2
+var Camera = Camera3D
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		mouse_position = event.screen_relative
+		rotate_y(-event.screen_relative.x * 0.003)
+		rotate_x(-event.screen_relative.y * 0.003)
+
+func _process(rotation):
+	rotation.x.clamp(1.5,-1.5)
+	rotation.y.clamp(1.5,-1.5)
 	
