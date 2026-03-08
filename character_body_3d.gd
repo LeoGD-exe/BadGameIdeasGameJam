@@ -26,3 +26,14 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func find_camera(NodePath) -> Camera3D:
+	var Camera = get_child(2).Camera3D
+	
+	if find_camera(InputEventAction):
+		find_camera(mouse_entered)
+		
+	
+	return 
+	
+	
