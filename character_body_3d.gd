@@ -26,20 +26,28 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-
+#Lock the mouse to the screen so you cant move it 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 var mouse_position: Vector2
 var Camera = Camera3D
-
+var mouse_rotation_max_x = 1.5
+var mouse_rotation_min_x = -1.5
+var mouse_rotation_now = 0.00
+#so you can move the camera
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_position = event.screen_relative
 		rotate_y(-event.screen_relative.x * 0.003)
-		rotate_x(-event.screen_relative.y * 0.003)
-
-func _process(rotation):
-	rotation.x.clamp(1.5,-1.5)
-	rotation.y.clamp(1.5,-1.5)
+		rotate_x(-event.screen_relative.y * 0.003)	
+		
+		mouse_rotation_now += mouse_rotation_now * -0.001
+		mouse_rotation_now = clamp(mouse_rotation_max_x,mouse_rotation_min_x,mouse_rotation_now)
+		
+		
+		
+		
+		
 	
